@@ -27,3 +27,12 @@ class AppCoordinator: Coordinator {
         navigationController.pushViewController(categoriesViewController, animated: false)
     }
 }
+
+extension AppCoordinator: CategoriesCoordinator {
+    func showArticles(_ articles: [Article]) {
+        let viewModel = ArticlesViewModel(articles: articles)
+        let viewController = ArticlesViewController(viewModel: viewModel)
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+}

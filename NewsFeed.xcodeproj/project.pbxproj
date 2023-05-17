@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484C3F272A149B9E00D2B034 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F262A149B9E00D2B034 /* ArticleViewController.swift */; };
+		484C3F292A149C0E00D2B034 /* ArticlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F282A149C0E00D2B034 /* ArticlesViewModel.swift */; };
+		484C3F2B2A149C6A00D2B034 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F2A2A149C6A00D2B034 /* ArticleTableViewCell.swift */; };
 		48D4E5582A145BA30010F8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5572A145BA30010F8B7 /* AppDelegate.swift */; };
 		48D4E55A2A145BA30010F8B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5592A145BA30010F8B7 /* SceneDelegate.swift */; };
 		48D4E55C2A145BA30010F8B7 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E55B2A145BA30010F8B7 /* CategoriesViewController.swift */; };
@@ -18,7 +21,7 @@
 		48D4E5882A1464880010F8B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5872A1464880010F8B7 /* NetworkService.swift */; };
 		48D4E58A2A1464B30010F8B7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5892A1464B30010F8B7 /* Constants.swift */; };
 		48D4E58C2A1465580010F8B7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */; };
-		48D4E58F2A1465F70010F8B7 /* CategoriesCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58E2A1465F70010F8B7 /* CategoriesCoordinatable.swift */; };
+		48D4E58F2A1465F70010F8B7 /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58E2A1465F70010F8B7 /* CategoriesCoordinator.swift */; };
 		48D4E5912A1466270010F8B7 /* ArticleCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5902A1466270010F8B7 /* ArticleCoordinatable.swift */; };
 		48D4E5942A1469750010F8B7 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5932A1469750010F8B7 /* Article.swift */; };
 		48D4E5972A146D500010F8B7 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5962A146D500010F8B7 /* CategoriesViewModel.swift */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		484C3F262A149B9E00D2B034 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		484C3F282A149C0E00D2B034 /* ArticlesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewModel.swift; sourceTree = "<group>"; };
+		484C3F2A2A149C6A00D2B034 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		48D4E5542A145BA30010F8B7 /* NewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D4E5572A145BA30010F8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48D4E5592A145BA30010F8B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +66,7 @@
 		48D4E5872A1464880010F8B7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		48D4E5892A1464B30010F8B7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		48D4E58E2A1465F70010F8B7 /* CategoriesCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinatable.swift; sourceTree = "<group>"; };
+		48D4E58E2A1465F70010F8B7 /* CategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinator.swift; sourceTree = "<group>"; };
 		48D4E5902A1466270010F8B7 /* ArticleCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCoordinatable.swift; sourceTree = "<group>"; };
 		48D4E5932A1469750010F8B7 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		48D4E5962A146D500010F8B7 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +100,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		484C3F252A149B7600D2B034 /* Article screen */ = {
+			isa = PBXGroup;
+			children = (
+				484C3F2A2A149C6A00D2B034 /* ArticleTableViewCell.swift */,
+				484C3F262A149B9E00D2B034 /* ArticleViewController.swift */,
+				484C3F282A149C0E00D2B034 /* ArticlesViewModel.swift */,
+			);
+			path = "Article screen";
+			sourceTree = "<group>";
+		};
 		48D4E54B2A145BA30010F8B7 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +133,7 @@
 		48D4E5562A145BA30010F8B7 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				484C3F252A149B7600D2B034 /* Article screen */,
 				48D4E59E2A14877F0010F8B7 /* Extensions */,
 				48D4E5922A14693B0010F8B7 /* Models */,
 				48D4E58D2A1465810010F8B7 /* App coordinator */,
@@ -153,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */,
-				48D4E58E2A1465F70010F8B7 /* CategoriesCoordinatable.swift */,
+				48D4E58E2A1465F70010F8B7 /* CategoriesCoordinator.swift */,
 				48D4E5902A1466270010F8B7 /* ArticleCoordinatable.swift */,
 			);
 			path = "App coordinator";
@@ -321,11 +338,14 @@
 				48D4E5972A146D500010F8B7 /* CategoriesViewModel.swift in Sources */,
 				48D4E5942A1469750010F8B7 /* Article.swift in Sources */,
 				48D4E59D2A147EAA0010F8B7 /* CategoryCollectionViewCell.swift in Sources */,
-				48D4E58F2A1465F70010F8B7 /* CategoriesCoordinatable.swift in Sources */,
+				48D4E58F2A1465F70010F8B7 /* CategoriesCoordinator.swift in Sources */,
 				48D4E55C2A145BA30010F8B7 /* CategoriesViewController.swift in Sources */,
 				48D4E5912A1466270010F8B7 /* ArticleCoordinatable.swift in Sources */,
 				48D4E5582A145BA30010F8B7 /* AppDelegate.swift in Sources */,
+				484C3F272A149B9E00D2B034 /* ArticleViewController.swift in Sources */,
 				48D4E5992A146E640010F8B7 /* ArticleListResponse.swift in Sources */,
+				484C3F292A149C0E00D2B034 /* ArticlesViewModel.swift in Sources */,
+				484C3F2B2A149C6A00D2B034 /* ArticleTableViewCell.swift in Sources */,
 				48D4E5882A1464880010F8B7 /* NetworkService.swift in Sources */,
 				48D4E55A2A145BA30010F8B7 /* SceneDelegate.swift in Sources */,
 				48D4E5A02A14878F0010F8B7 /* ColourExtension.swift in Sources */,

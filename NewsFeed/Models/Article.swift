@@ -21,6 +21,14 @@ struct Article: Codable {
     let timeStamp: Int?
     let url: String?
     let id: Int?
+    
+    var createdDate: Date {
+        guard let timeStamp = timeStamp else {
+            return Date(timeIntervalSince1970: 0)
+        }
+
+        return Date(timeIntervalSince1970: TimeInterval(timeStamp / 1000))
+    }
 }
 
 struct Category: Codable, Hashable {
@@ -56,6 +64,8 @@ struct Category: Codable, Hashable {
             return Constants.royalBlueColor
         case "street talk":
             return Constants.darkCyanColor
+        case "north america":
+            return Constants.darkOrchidColor
         default:
             return UIColor.black
         }
