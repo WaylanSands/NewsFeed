@@ -10,10 +10,20 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Create a new UIWindow instance.
+        window = UIWindow()
+        
+        // Set the root view controller to a new UIViewController instance.
+        window?.rootViewController = UIViewController()
+        
+        // Make the window key and visible.
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
