@@ -18,11 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create a new UIWindow instance.
         window = UIWindow()
         
-        // Set the root view controller to a new UIViewController instance.
-        window?.rootViewController = UIViewController()
+        let navigationController = UINavigationController()
+        
+        // Initialise the AppCoordinator
+        let appCoordinator = AppCoordinator(navigationController: navigationController)
+        
+        // Set the root view controller to the appCoordinator's navigationController.
+        window?.rootViewController = navigationController
         
         // Make the window key and visible.
         window?.makeKeyAndVisible()
+        
+        // Push CategoriesViewController onto the navigation stack
+        appCoordinator.start()
         
         return true
     }

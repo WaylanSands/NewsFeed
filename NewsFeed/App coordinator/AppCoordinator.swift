@@ -1,0 +1,27 @@
+//
+//  AppCoordinator.swift
+//  NewsFeed
+//
+//  Created by Waylan Sands on 17/5/2023.
+//
+
+import UIKit
+
+protocol Coordinator: AnyObject {
+    func start()
+}
+
+class AppCoordinator: Coordinator {
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
+    func start() {
+        let categoriesViewController = CategoriesViewController()
+        categoriesViewController.coordinatorDelegate = self
+        navigationController.pushViewController(categoriesViewController, animated: false)
+    }
+}
