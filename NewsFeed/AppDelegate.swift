@@ -15,6 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        if #unavailable(iOS 13.0) {
+            // Will create an AppCoordinator instance for devices less than iOS 13 and
+            // set the window's rootViewController as the appCoordinator's navigationController.
+            // For devices running iOS 13 and greater the scene delegate will handle this operation.
+            startAppCoordinator()
+        }
+        
+        return true
+    }
+    
+    private func startAppCoordinator() {
         // Create a new UIWindow instance.
         window = UIWindow()
         
@@ -31,8 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Push CategoriesViewController onto the navigation stack
         appCoordinator.start()
-        
-        return true
     }
 
     // MARK: UISceneSession Lifecycle

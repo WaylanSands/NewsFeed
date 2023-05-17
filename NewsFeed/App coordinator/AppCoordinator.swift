@@ -20,7 +20,9 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let categoriesViewController = CategoriesViewController()
+        let service = NetworkService()
+        let viewModel = CategoriesViewModel(networkService: service)
+        let categoriesViewController = CategoriesViewController(viewModel: viewModel)
         categoriesViewController.coordinatorDelegate = self
         navigationController.pushViewController(categoriesViewController, animated: false)
     }
