@@ -23,14 +23,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Create a new UIWindow using the retrieved UIWindowScene.
         let window = UIWindow(windowScene: windowScene)
         
-        // Set the root view controller of the window to an instance of ViewController.
-        window.rootViewController = ViewController()
+        let navigationController = UINavigationController()
+        
+        // Initialise the AppCoordinator
+        let appCoordinator = AppCoordinator(navigationController: navigationController)
+
+        // Set the root view controller of the window to the appCoordinator's navigationController.
+        window.rootViewController = navigationController
         
         // Set the created window as the scene's UIWindow.
         self.window = window
         
         // Make the window the key window and set it as visible.
         window.makeKeyAndVisible()
+        
+        // Push CategoriesViewController onto the navigation stack
+        appCoordinator.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
