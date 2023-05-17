@@ -22,12 +22,35 @@ struct Article: Codable {
     let url: String?
     let id: Int?
     
-    var createdDate: Date {
+    var createdDate: Date? {
         guard let timeStamp = timeStamp else {
-            return Date(timeIntervalSince1970: 0)
+            return nil
         }
 
         return Date(timeIntervalSince1970: TimeInterval(timeStamp / 1000))
+    }
+
+    var timeSinceNow: String {
+        guard let createdDate = createdDate else {
+            return ""
+        }
+
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+
+        return formatter.localizedString(for: createdDate, relativeTo: Date())
+    }
+    
+    var thumbnailUrl: String? {
+        guard let imageAssets = relatedImages, !imageAssets.isEmpty else {
+            return nil
+        }
+        
+        let thumbnail = imageAssets.first { $0.type?.lowercased() == "thumbnail" }
+        let validImages = imageAssets.filter { $0.url != nil && $0.width != nil }
+        let smallestImage = validImages.sorted { $0.width! < $1.width! }.first
+        
+        return thumbnail?.url ?? smallestImage?.url
     }
 }
 
