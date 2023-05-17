@@ -18,7 +18,7 @@ class NetworkService {
         guard let URL = Constants.newsURL else {
             return .failure(NewsFeedError.invalidURL)
         }
-        print("called")
+
         var request = URLRequest(url: URL)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
