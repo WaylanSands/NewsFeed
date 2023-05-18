@@ -33,18 +33,10 @@ struct Article: Codable {
 
         return Date(timeIntervalSince1970: TimeInterval(timeStamp / 1000))
     }
-
-    var timeSinceNow: String {
-        guard let createdDate = createdDate else {
-            return ""
-        }
-
-        let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .full
-
-        return formatter.localizedString(for: createdDate, relativeTo: Date())
-    }
     
+    /// Returns the url of first image of type "thumbnail" from imageAssets,
+    /// otherwise the url of the smallest image (in width).
+    /// Will return nil if relatedImages is nil or empty.
     var thumbnailUrl: String? {
         guard let imageAssets = relatedImages, !imageAssets.isEmpty else {
             return nil

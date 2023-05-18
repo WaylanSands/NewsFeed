@@ -8,6 +8,7 @@
 import UIKit
 
 protocol CategoryViewModelDelegate: AnyObject {
+    func present(_ error: Error)
     func loadCategories()
 }
 
@@ -76,6 +77,10 @@ final class CategoriesViewController: UIViewController {
 }
 
 extension CategoriesViewController: CategoryViewModelDelegate {
+    func present(_ error: Error) {
+        ErrorPresenter.presentErrorAlert(error, from: self)
+    }
+    
     func loadCategories() {
         collectionView.reloadData()
     }
@@ -94,6 +99,7 @@ extension CategoriesViewController: UICollectionViewDataSource, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CategoryCollectionViewCell.reuseIdentifier,
             for: indexPath) as? CategoryCollectionViewCell else {
+            ErrorPresenter.presentErrorAlert(NewsFeedError.categoryCellError, from: self)
             return UICollectionViewCell()
         }
     
@@ -106,8 +112,6 @@ extension CategoriesViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Handle item selection here
-        
         let index = indexPath.row
         
         // Safety check the index is within range.

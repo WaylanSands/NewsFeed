@@ -58,6 +58,7 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.reuseIdentifier) as? ArticleTableViewCell else {
+            ErrorPresenter.presentErrorAlert(NewsFeedError.categoryCellError, from: self)
             return UITableViewCell()
         }
         
@@ -78,9 +79,10 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
 extension ArticlesViewController: ArticleCellDelegate {
     func visitArticle(_ urlString: String?) {
         guard let urlString = urlString, let url = URL(string: urlString) else {
+            ErrorPresenter.presentErrorAlert(NewsFeedError.invalidURL, from: self)
             return
         }
         
-        coordinatorDelegate?.presentWebView(for: url)
+        coordinatorDelegate?.presentWebView(with: url)
     }
 }

@@ -55,7 +55,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     func setup(with category: Category) {
         self.cardView.backgroundColor =  category.colour
-        self.titleLabel.text = category.name ?? ""
+        self.titleLabel.text = category.name ?? "Unknown"
     }
     
 }

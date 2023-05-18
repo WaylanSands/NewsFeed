@@ -100,7 +100,7 @@ final class ArticleTableViewCell: UITableViewCell {
     
     func setup(with article: Article) {
         self.authorLabel.text = authorNames(from: article.authors)
-        self.createdAtLabel.text = article.timeSinceNow
+        self.createdAtLabel.text = article.createdDate?.timeSinceNow
         self.abstractLabel.text = article.theAbstract
         self.titleLabel.text = article.headline
         
