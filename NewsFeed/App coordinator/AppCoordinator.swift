@@ -21,7 +21,7 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let service = NetworkService()
+        let service = NetworkService(session: URLSession.shared)
         let viewModel = CategoriesViewModel(networkService: service)
         let categoriesViewController = CategoriesViewController(viewModel: viewModel)
         categoriesViewController.coordinatorDelegate = self
