@@ -19,13 +19,13 @@ This iOS app consumes the provided API endpoint to display a list of news articl
    - `ArticlesViewModel`: Orders the articles by timestamp and updates the ArticlesViewController.
    - `ErrorPresenter`: Handles the presentation of error messages.
 
-5. Unit tests and UI tests: The PR includes a comprehensive suite of unit tests covering critical functionalities. Notable unit test classes include `NetworkServiceTests`, `CategoriesViewModelTests`, and `ArticlesViewModelTest`. Additionally, a UI test class named `CategoriesViewControllerUITests` is provided to verify the functionality of the CategoriesViewController. It is suggested to add more UI tests, but the time constraint for the code challenge is acknowledged.
+5. Unit tests and UI tests: The PR includes tests covering critical functionalities. Notable unit test classes include `NetworkServiceTests`, `CategoriesViewModelTests`, and `ArticlesViewModelTest` and `CategoriesViewControllerUITests`. I'd like to add more UI tests, but the time constraint for this code challenge is acknowledged.
 
 6. Layout and styling: The app's layout is implemented programmatically, and the main storyboard has been removed. I prefer SnapKit library typically for creating flexible and readable constraints, although in this case, NSLayoutConstraints were used for simplicity. A separate constants file holds color and font constants for consistency.
 
 7. Extensions and utilities: extensions for Date and UIColor types. These extensions allow for converting a hex value to a UIColor and formatting a Date as a user-friendly "time since now" string.
 
-The app is built using a clean architecture, utilizes popular third-party libraries for image handling, and includes thorough unit testing. The use of MVVM and Coordinator patterns ensures separation of concerns and improves code organization.
+The app is built using a clean architecture, utilizes popular third-party libraries for image handling. The use of MVVM and Coordinator patterns ensures separation of concerns and improves code organization.
 
 
 *Note this app does not support dark-mode or horizontal orientation*
