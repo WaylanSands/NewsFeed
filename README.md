@@ -26,3 +26,6 @@ This PR adds a new iPhone app that consumes the provided API endpoint to display
 7. Extensions and utilities: The PR introduces extensions for Date and UIColor types. These extensions allow for converting a hex value to a UIColor and formatting a Date as a user-friendly "time since now" string.
 
 Overall, this PR adds a fully functional news articles app that adheres to the given requirements. The app is built using a clean architecture, utilizes popular third-party libraries for image handling, and includes thorough unit testing. The use of MVVM and Coordinator patterns ensures separation of concerns and improves code organization.
+
+
+*Note this app does not support dark-mode or horizontal orientation*
