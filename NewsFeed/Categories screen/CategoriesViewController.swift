@@ -49,6 +49,7 @@ final class CategoriesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.viewModel.delegate = self
         self.title = viewModel.title
+        self.fetchArticles()
     }
     
     required init?(coder: NSCoder) {
@@ -64,6 +65,12 @@ final class CategoriesViewController: UIViewController {
         collectionView.delegate = self
         
         configureSubviews()
+    }
+    
+    func fetchArticles() {
+        Task {
+            await self.viewModel.fetchArticles()
+        }
     }
     
     private func configureSubviews() {

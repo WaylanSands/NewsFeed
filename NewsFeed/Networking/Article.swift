@@ -48,6 +48,22 @@ struct Article: Codable {
         
         return thumbnail?.url ?? smallestImage?.url
     }
+    
+    /// Used for Unit testing
+    init(category: Category, timeStamp: Int? = nil) {
+        self.categories = [category]
+        self.timeStamp = timeStamp
+        self.tabletHeadline = nil
+        self.relatedImages = nil
+        self.authors = nil
+        self.headline = nil
+        self.theAbstract = nil
+        self.assetType = nil
+        self.sponsored = nil
+        self.byLine = nil
+        self.url = nil
+        self.id = nil
+    }
 }
 
 struct Category: Codable, Hashable {

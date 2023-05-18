@@ -23,38 +23,35 @@ class CategoriesViewModel {
     
     let title = "News Categories"
     
-    private let networkService: NetworkService
+    private let networkService: ArticleService
 
-    init(networkService: NetworkService) {
+    init(networkService: ArticleService) {
         self.networkService = networkService
-        loadArticles()
     }
     
     /// Will fetch a list of articles from API, update categories and delegate.
     /// Displays an error alert if an error occurs.
-    private func loadArticles() {
-        Task {
-            let result = await networkService.getArticleList()
+    func fetchArticles() async {
+        let result = await networkService.getArticleList()
+        
+        switch result {
+        case .success(let articles):
             
-            switch result {
-            case .success(let articles):
+            // Update changes on the main thread.
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 
-                // Update changes on the main thread.
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    
-                    let allCategories = articles.compactMap { $0.categories?.first }
-                    self.categories = Array(Set(allCategories))
-                    self.articles = articles
-
-                    // Update the delegate categories have been loaded
-                    self.delegate?.loadCategories()
-                }
-            case .failure(let error):
+                let allCategories = articles.compactMap { $0.categories?.first }
+                self.categories = Array(Set(allCategories))
+                self.articles = articles
                 
-                DispatchQueue.main.async { [weak self] in
-                    self?.delegate?.present(error)
-                }
+                // Update the delegate categories have been loaded
+                self.delegate?.loadCategories()
+            }
+        case .failure(let error):
+            
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.present(error)
             }
         }
     }

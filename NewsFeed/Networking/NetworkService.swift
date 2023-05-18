@@ -27,7 +27,11 @@ enum NewsFeedError: Error {
     }
 }
 
-class NetworkService {
+protocol ArticleService {
+    func getArticleList() async -> Result<[Article], Error>
+}
+
+class NetworkService: ArticleService {
     /// Will attempt to fetch an Array of Article from the FairFax URL.
     /// Returns a Result of type [Article] or Error.
     func getArticleList() async -> Result<[Article], Error> {
