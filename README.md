@@ -2,7 +2,7 @@
 
 **News Articles App with MVVM and Coordinator Pattern**
 
-This PR adds a new iPhone app that consumes the provided API endpoint to display a list of news articles to the user. The app's purpose is to allow users to browse and read news articles from various categories. The main features and improvements introduced in this PR include:
+This iOS app consumes the provided API endpoint to display a list of news articles to the user. The app's purpose is to allow users to browse and read news articles from various categories. The main features and improvements introduced in this PR include:
 
 1. Integration with the API endpoint: The app fetches news articles from the API endpoint located at `https://bruce-v2-mob.fairfaxmedia.com.au/1/coding_test/13ZZQX/full`. The articles are retrieved and displayed via `ArticlesViewController`
 
