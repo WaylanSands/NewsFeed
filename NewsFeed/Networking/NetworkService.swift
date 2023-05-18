@@ -32,6 +32,13 @@ protocol ArticleService {
 }
 
 class NetworkService: ArticleService {
+    
+    private let urlSession: URLSession
+    
+    init(session: URLSession) {
+        self.urlSession = session
+    }
+    
     /// Will attempt to fetch an Array of Article from the FairFax URL.
     /// Returns a Result of type [Article] or Error.
     func getArticleList() async -> Result<[Article], Error> {
@@ -45,7 +52,7 @@ class NetworkService: ArticleService {
         request.httpMethod = "GET"
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await urlSession.data(for: request)
             let decoder = JSONDecoder()
             let listResponse = try decoder.decode(ArticleListResponse.self, from: data)
             

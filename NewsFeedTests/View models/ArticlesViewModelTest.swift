@@ -67,7 +67,7 @@ class ArticlesViewModelTest: XCTestCase {
         XCTAssertEqual(sortedDates, vmSortedDates)
     }
     
-    // Helper functions
+    // MARK: - Helper functions
     
     func createDummyCategories(count: Int) -> [Category] {
         return (0..<count).map { _ in Category(name: "") }

@@ -40,6 +40,8 @@
 		4835C61A2A15CDAD0077A69C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */; };
 		4835C61B2A15CDAE0077A69C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */; };
 		4835C61D2A15DD760077A69C /* ArticlesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835C61C2A15DD760077A69C /* ArticlesViewModelTest.swift */; };
+		4835C61F2A15E4910077A69C /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835C61E2A15E4910077A69C /* NetworkServiceTests.swift */; };
+		4835C6212A15ED730077A69C /* UrlSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835C6202A15ED730077A69C /* UrlSessionMock.swift */; };
 		484C3F272A149B9E00D2B034 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F262A149B9E00D2B034 /* ArticleViewController.swift */; };
 		484C3F292A149C0E00D2B034 /* ArticlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F282A149C0E00D2B034 /* ArticlesViewModel.swift */; };
 		484C3F2B2A149C6A00D2B034 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F2A2A149C6A00D2B034 /* ArticleTableViewCell.swift */; };
@@ -93,6 +95,8 @@
 		27C1F87ADA9D9F577EBBE638 /* Pods-NewsFeed-NewsFeedUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsFeed-NewsFeedUITests.debug.xcconfig"; path = "Target Support Files/Pods-NewsFeed-NewsFeedUITests/Pods-NewsFeed-NewsFeedUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		3335716674552EF26E712F90 /* Pods_NewsFeedTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NewsFeedTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4835C61C2A15DD760077A69C /* ArticlesViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewModelTest.swift; sourceTree = "<group>"; };
+		4835C61E2A15E4910077A69C /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		4835C6202A15ED730077A69C /* UrlSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionMock.swift; sourceTree = "<group>"; };
 		484C3F262A149B9E00D2B034 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		484C3F282A149C0E00D2B034 /* ArticlesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewModel.swift; sourceTree = "<group>"; };
 		484C3F2A2A149C6A00D2B034 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 		48D4E56D2A145BA60010F8B7 /* NewsFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				4835C61E2A15E4910077A69C /* NetworkServiceTests.swift */,
 				48EAA4422A15C36300A02A75 /* View models */,
 				48EAA43A2A15C2C700A02A75 /* Mocks */,
 				48D4E56E2A145BA60010F8B7 /* NewsFeedTests.swift */,
@@ -273,6 +278,7 @@
 			children = (
 				48EAA43F2A15C31700A02A75 /* MockCategoryViewModelDelegate.swift */,
 				48EAA43B2A15C2DC00A02A75 /* MockNetworkService.swift */,
+				4835C6202A15ED730077A69C /* UrlSessionMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -583,7 +589,9 @@
 				48EAA4412A15C33600A02A75 /* CategoriesViewController.swift in Sources */,
 				4835C6022A15CD470077A69C /* ErrorPresenter.swift in Sources */,
 				48EAA43D2A15C2FC00A02A75 /* NetworkService.swift in Sources */,
+				4835C6212A15ED730077A69C /* UrlSessionMock.swift in Sources */,
 				4835C6182A15CDA80077A69C /* CategoriesCoordinator.swift in Sources */,
+				4835C61F2A15E4910077A69C /* NetworkServiceTests.swift in Sources */,
 				4835C61A2A15CDAD0077A69C /* AppCoordinator.swift in Sources */,
 				48D4E56F2A145BA60010F8B7 /* NewsFeedTests.swift in Sources */,
 				4835C6082A15CD610077A69C /* ArticleViewController.swift in Sources */,
