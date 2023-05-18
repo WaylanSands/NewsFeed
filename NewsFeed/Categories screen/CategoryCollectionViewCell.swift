@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryCollectionViewCell: UICollectionViewCell {
+final class CategoryCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "categoryCollectionViewCell"
     
     private lazy var cardView: UIView = {
@@ -19,7 +19,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        label.font = Constants.extraLargeFont
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.numberOfLines = 0

@@ -11,8 +11,8 @@ protocol CategoryViewModelDelegate: AnyObject {
     func loadCategories()
 }
 
-class CategoriesViewController: UIViewController {
-    let viewModel: CategoriesViewModel
+final class CategoriesViewController: UIViewController {
+    private let viewModel: CategoriesViewModel
     
     private lazy var collectionLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -41,7 +41,7 @@ class CategoriesViewController: UIViewController {
         return collectionView
     }()
     
-    weak var coordinatorDelegate: Coordinator?
+    var coordinatorDelegate: CategoriesCoordinator?
     
     init(viewModel: CategoriesViewModel) {
         self.viewModel = viewModel
@@ -72,12 +72,6 @@ class CategoriesViewController: UIViewController {
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-    }
-}
-
-extension CategoriesViewController: CategoriesCoordinatable {
-    func showDetailScreen() {
-        //
     }
 }
 
@@ -113,5 +107,19 @@ extension CategoriesViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Handle item selection here
+        
+        let index = indexPath.row
+        
+        // Safety check the index is within range.
+        guard index < viewModel.categories.count else {
+            return
+        }
+        
+        let selectedCategory = viewModel.categories[index]
+        
+        // Get all articles within the selected category.
+        let articles = viewModel.articlesWithin(selectedCategory)
+                
+        coordinatorDelegate?.showArticles(articles)
     }
 }

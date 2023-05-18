@@ -12,8 +12,11 @@ class CategoriesViewModel {
     /// delegate will  be updated when categories have been fetched.
     weak var delegate: CategoryViewModelDelegate?
         
-    /// List of unique categories from fetched articles.
+    /// Array of unique categories from fetched articles.
     lazy var categories = [Category]()
+    
+    /// Articles returned from api accessed via articlesWithin method.
+    private lazy var articles = [Article]()
     
     /// Number of collection view sections.
     let numberOfSections: Int = 1
@@ -21,7 +24,7 @@ class CategoriesViewModel {
     let title = "News Categories"
     
     private let networkService: NetworkService
-    
+
     init(networkService: NetworkService) {
         self.networkService = networkService
         loadArticles()
@@ -42,6 +45,7 @@ class CategoriesViewModel {
                     
                     let allCategories = articles.compactMap { $0.categories?.first }
                     self.categories = Array(Set(allCategories))
+                    self.articles = articles
 
                     // Update the delegate categories have been loaded
                     self.delegate?.loadCategories()
@@ -50,5 +54,9 @@ class CategoriesViewModel {
                 print(error)
             }
         }
+    }
+    
+    func articlesWithin(_ category: Category) -> [Article] {
+        return articles.filter { $0.categories?.first == category}
     }
 }
