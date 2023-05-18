@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+struct ArticleListResponse: Codable {
+    let assets: [Article]?
+}
+
 struct Article: Codable {
     let tabletHeadline: String?
     let categories: [Category]?
@@ -87,6 +91,12 @@ struct Category: Codable, Hashable {
             return Constants.royalBlueColor
         case "street talk":
             return Constants.darkCyanColor
+        case "commercial":
+            return Constants.darkCeruleanColor
+        case "economy":
+            return Constants.mediumBlueColor
+        case "business education":
+            return Constants.oliveDrabColor
         case "north america":
             return Constants.darkOrchidColor
         default:

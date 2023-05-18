@@ -8,7 +8,6 @@
 import Foundation
 
 class ArticlesViewModel {
-    
     let articles: [Article]
     
     var numberOfRows: Int {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArticlesViewController: UIViewController {
+final class ArticlesViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -16,6 +16,9 @@ class ArticlesViewController: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
+    
+    /// Handles web view presentation
+    var coordinatorDelegate: ArticleCoordinator?
     
     private let viewModel: ArticlesViewModel
     
@@ -60,11 +63,24 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
         
         let index = indexPath.row
         
+        // Safely setup cell with article
         if index < viewModel.articles.count {
             let article = viewModel.articles[index]
             cell.setup(with: article)
         }
         
+        cell.delegate = self
+    
         return cell
+    }
+}
+
+extension ArticlesViewController: ArticleCellDelegate {
+    func visitArticle(_ urlString: String?) {
+        guard let urlString = urlString, let url = URL(string: urlString) else {
+            return
+        }
+        
+        coordinatorDelegate?.presentWebView(for: url)
     }
 }

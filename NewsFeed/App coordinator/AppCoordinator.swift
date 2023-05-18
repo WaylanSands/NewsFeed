@@ -32,7 +32,15 @@ extension AppCoordinator: CategoriesCoordinator {
     func showArticles(_ articles: [Article]) {
         let viewModel = ArticlesViewModel(articles: articles)
         let viewController = ArticlesViewController(viewModel: viewModel)
+        viewController.coordinatorDelegate = self
         
         navigationController.pushViewController(viewController, animated: true)
+    }
+}
+
+extension AppCoordinator: ArticleCoordinator {
+    func presentWebView(for URL: URL) {
+        let webViewViewController = WebViewController(url: URL)
+        navigationController.pushViewController(webViewViewController, animated: true)
     }
 }

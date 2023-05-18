@@ -11,7 +11,7 @@ protocol CategoryViewModelDelegate: AnyObject {
     func loadCategories()
 }
 
-class CategoriesViewController: UIViewController {
+final class CategoriesViewController: UIViewController {
     private let viewModel: CategoriesViewModel
     
     private lazy var collectionLayout: UICollectionViewFlowLayout = {
