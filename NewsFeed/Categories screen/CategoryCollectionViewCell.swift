@@ -17,7 +17,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.extraLargeFont
         label.translatesAutoresizingMaskIntoConstraints = false
