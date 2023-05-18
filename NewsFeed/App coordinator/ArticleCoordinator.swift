@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ArticleCoordinator {
-    func presentWebView(for URL: URL)
+    func presentWebView(with url: URL)
 }

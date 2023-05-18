@@ -8,12 +8,28 @@
 import Foundation
 
 enum NewsFeedError: Error {
+    case categoryCellError
+    case articleCellError
     case assetError
     case invalidURL
+    
+    var description: String {
+        switch self {
+        case .assetError:
+            return "We were unable to retrieve article assets from endpoint"
+        case .invalidURL:
+            return "Seems the url is invalid for the request"
+        case .categoryCellError:
+            return "We ran into an issue creating category cells"
+        case .articleCellError:
+            return "We ran into an issue creating article cells"
+        }
+    }
 }
 
 class NetworkService {
-    
+    /// Will attempt to fetch an Array of Article from the FairFax URL.
+    /// Returns a Result of type [Article] or Error.
     func getArticleList() async -> Result<[Article], Error> {
         guard let URL = Constants.newsURL else {
             return .failure(NewsFeedError.invalidURL)
@@ -38,5 +54,4 @@ class NetworkService {
             return .failure(error)
         }
     }
-    
 }

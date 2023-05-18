@@ -8,8 +8,10 @@
 import Foundation
 
 class ArticlesViewModel {
+    /// Array of Article ordered by timestamp.
     let articles: [Article]
     
+    /// Returns number of articles
     var numberOfRows: Int {
         articles.count
     }

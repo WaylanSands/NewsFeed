@@ -11,7 +11,7 @@ import UIKit
 /// A simple UIViewController that contains a WKWebView and loads url on viewDidLoad.
 final class WebViewController: UIViewController {
     
-    private lazy var webView: WKWebView = {
+    private lazy var webView: WKWebView? = {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
@@ -35,15 +35,15 @@ final class WebViewController: UIViewController {
     }
     
     private func configureSubviews() {
-        view.addSubview(webView)
-        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        view.addSubview(webView!)
+        webView!.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        webView!.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        webView!.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        webView!.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     }
     
     private func loadArticle() {
         let request = URLRequest(url: url)
-        webView.load(request)
+        webView?.load(request)
     }
 }

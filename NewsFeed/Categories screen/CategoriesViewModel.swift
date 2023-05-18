@@ -51,11 +51,15 @@ class CategoriesViewModel {
                     self.delegate?.loadCategories()
                 }
             case .failure(let error):
-                print(error)
+                
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.present(error)
+                }
             }
         }
     }
     
+    /// Returns an Array of Article within the provided category
     func articlesWithin(_ category: Category) -> [Article] {
         return articles.filter { $0.categories?.first == category}
     }
