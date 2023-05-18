@@ -40,7 +40,7 @@ class CategoriesViewControllerUITests: XCTestCase {
             XCTAssertEqual(cellCount, dummyCategories.count)
             
             // Assert that the category names are correctly displayed in the cells
-            for (index, category) in dummyCategories.enumerated() {
+            for (index, category) in viewModel.categories.enumerated() {
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell = viewController.collectionView(viewController.collectionView, cellForItemAt: indexPath) as? CategoryCollectionViewCell
                 
