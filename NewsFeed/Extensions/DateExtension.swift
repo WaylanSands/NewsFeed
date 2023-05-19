@@ -8,11 +8,13 @@
 import Foundation
 
 extension Date {
-    /// Returns Aa localised string representing the relative time difference.
+    /// Returns a localised string representing the relative time difference.
     var timeSinceNow: String {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
         
-        return formatter.localizedString(for: self, relativeTo: Date())
+        let currentDate = Date()
+        
+        return formatter.localizedString(for: self, relativeTo: currentDate)
     }
 }

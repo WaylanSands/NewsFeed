@@ -58,7 +58,7 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.reuseIdentifier) as? ArticleTableViewCell else {
-            ErrorPresenter.presentErrorAlert(NewsFeedError.categoryCellError, from: self)
+            ErrorPresenter.presentErrorAlert(NewsFeedError.articleCellError, from: self)
             return UITableViewCell()
         }
         

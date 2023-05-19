@@ -11,6 +11,8 @@ import XCTest
 
 class CategoriesViewControllerUITests: XCTestCase {
     
+    /// Test that collection view on CategoriesViewController
+    /// contains the same categories returned via the CategoriesViewModel.
     func testCategoriesAreAdded() throws {
         let dummyCategories = [
             Category(name: "Category 1"),
@@ -45,6 +47,8 @@ class CategoriesViewControllerUITests: XCTestCase {
                 let cell = viewController.collectionView(viewController.collectionView, cellForItemAt: indexPath) as? CategoryCollectionViewCell
                 
                 XCTAssertNotNil(cell, "Cell should not be nil")
+                
+                // Verify that the cell text is the same as the category name of the same index.
                 XCTAssertEqual(cell?.titleLabel.text, category.name)
             }
         }
