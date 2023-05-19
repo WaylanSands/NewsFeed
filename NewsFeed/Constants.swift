@@ -11,7 +11,7 @@ struct Constants {
     /// Fairfax Media code test URL.
     static let newsURL = URL(string: "https://bruce-v2-mob.fairfaxmedia.com.au/1/coding_test/13ZZQX/full")
     
-    // Colours
+    // MARK: - NewsFeed Colours
     static let darkGoldenrodColor = UIColor(hex: "#B8860B")
     static let darkCeruleanColor = UIColor(hex: "#167184")
     static let midnightBlueColor = UIColor(hex: "#1B2E43")
@@ -29,7 +29,36 @@ struct Constants {
     static let lightBlue = UIColor(hex: "#B7BBFF")
     static let faintBlue = UIColor(hex: "#E9ECFF")
     
-    // Fonts
+    /// Returns a colourOptions colour based on the length of a string.
+    static func colour(from text: String?) -> UIColor {
+        guard let text = text else {
+            return UIColor.black
+        }
+        
+        let length = text.count
+        let maxLength = colourOptions.count - 1
+        let index = length <= maxLength ? length : length % maxLength
+        return colourOptions[index] ?? UIColor.black
+    }
+    
+    static let colourOptions = [
+        darkGoldenrodColor,
+        darkCeruleanColor,
+        midnightBlueColor,
+        darkOrchid2Color,
+        darkOrchidColor,
+        outerSpaceColor,
+        mediumBlueColor,
+        steelBlueColor,
+        mossGreenColor,
+        oliveDrabColor,
+        slateGrayColor,
+        royalBlueColor,
+        darkCyanColor,
+        pumpkinColor,
+    ]
+    
+    // MARK: - NewsFeed Fonts
     static let smallFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
     static let mediumFont = UIFont.systemFont(ofSize: 16, weight: .medium)
     static let largeFont = UIFont.systemFont(ofSize: 18, weight: .bold)

@@ -17,13 +17,8 @@ class ArticlesViewModel {
     }
     
     init(articles: [Article]) {
-        // Sort the articles by timestamp. Articles with a timestamp of nil
-        // will be placed at the end of the array.
-        self.articles = articles.sorted { article1, article2 in
-            let timeStamp1 = article1.timeStamp ?? Int.max
-            let timeStamp2 = article2.timeStamp ?? Int.max
-            return timeStamp1 < timeStamp2
-        }
+        // Sort the articles by timestamp.
+        self.articles = articles.sorted()
     }
     
 }

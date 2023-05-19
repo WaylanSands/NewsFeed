@@ -65,13 +65,16 @@ class CategoriesViewModelTests: XCTestCase {
         // Double up "Business" named category
         let articles = createArticles(with: dummyCategories)
         
-        // Create unique array of Article.
-        let uniqueCategories = Array(Set(dummyCategories))
+        // Create unique array of Article ordered by name.
+        let uniqueCategories = Array(Set(dummyCategories)).sorted()
 
         mockNetworkServiceResult(.success(articles))
 
         // Fetch mocked articles.
         await viewModel.fetchArticles()
+        
+        // Sort array to match the uniqueCategories order.
+        viewModel.categories.sort()
         
         // Verify that the categories are unique.
         XCTAssertEqual(self.viewModel.categories, uniqueCategories)
@@ -80,6 +83,7 @@ class CategoriesViewModelTests: XCTestCase {
     /// Test if the articles returned via the CategoriesViewModel are
     /// the same category as the selected category.
     func testArticlesAreWithinCategory() async {
+        // Create categories with two with name "Business"
         let dummyCategories = [
             Category(name: "Business"),
             Category(name: "Investing"),
