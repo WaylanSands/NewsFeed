@@ -8,6 +8,20 @@ This iOS app consumes the provided API endpoint to display a list of news articl
 
 2. Use of Cocoapods and Kingfisher library: Cocoapods is used as the dependency management tool, and the Kingfisher library is integrated to facilitate image loading and caching. The Kingfisher library is known for its efficient image fetching and built-in caching capabilities.
 
+```
+# Install Cocoapods
+$ sudo gem install cocoapods
+
+# Create a Podfile
+$ pod init
+
+# Open the Podfile and add the following line
+pod 'Kingfisher'
+
+# Save the Podfile and install dependencies
+$ pod install
+```
+
 3. Architecture and design patterns: The app is developed using the MVVM (Model-View-ViewModel) architectural pattern with delegates, along with the Coordinator pattern for navigation. This promotes separation of concerns and enhances code maintainability.
 
 4. Notable classes:
