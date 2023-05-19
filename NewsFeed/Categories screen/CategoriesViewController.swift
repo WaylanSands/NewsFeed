@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol CategoryViewModelDelegate: AnyObject {
-    func present(_ error: Error)
-    func loadCategories()
-}
-
 final class CategoriesViewController: UIViewController {
     private let viewModel: CategoriesViewModel
     
@@ -75,7 +70,6 @@ final class CategoriesViewController: UIViewController {
     
     private func configureSubviews() {
         view.addSubview(collectionView)
-
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -85,11 +79,17 @@ final class CategoriesViewController: UIViewController {
 
 extension CategoriesViewController: CategoryViewModelDelegate {
     func present(_ error: Error) {
-        ErrorPresenter.presentErrorAlert(error, from: self)
+        // Present error on the main thread.
+        DispatchQueue.main.async {
+            ErrorPresenter.presentErrorAlert(error, from: self)
+        }
     }
     
     func loadCategories() {
-        collectionView.reloadData()
+        // Handle update of data on the main thread.
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
 }
 
