@@ -6,9 +6,9 @@ This iOS app consumes the provided API endpoint to display a list of news articl
 
 1. Integration with the API endpoint: The app fetches news articles from the API endpoint located at `https://bruce-v2-mob.fairfaxmedia.com.au/1/coding_test/13ZZQX/full`. The articles are retrieved and displayed via `ArticlesViewController`
 
-2. Use of Cocoapods and Kingfisher library: Cocoapods is used as the dependency management tool, and the Kingfisher library is integrated to facilitate image loading and caching. The Kingfisher library is known for its efficient image fetching and built-in caching capabilities.
+2. Use of Cocoapods and Kingfisher library: Cocoapods is used as the dependency management tool, and the [Kingfisher](https://github.com/onevcat/Kingfisher) is integrated to facilitate image loading and caching. The library is known for its efficient image fetching and built-in caching capabilities.
 
-```
+```ruby
 # Install Cocoapods
 $ sudo gem install cocoapods
 
@@ -33,7 +33,7 @@ $ pod install
    - `ArticlesViewModel`: Orders the articles by timestamp and updates the ArticlesViewController.
    - `ErrorPresenter`: Handles the presentation of error messages.
 
-5. Unit tests and UI tests: The PR includes tests covering critical functionalities. Notable unit test classes include `NetworkServiceTests`, `CategoriesViewModelTests`, `ArticlesViewModelTest` and `CategoriesViewControllerUITests`. I'd like to add more UI tests, but the time constraint for this code challenge is acknowledged.
+5. Unit tests and UI tests: The PR includes tests covering critical functionalities. Test classes include `NetworkServiceTests`, `CategoriesViewModelTests`, `ArticlesViewModelTest` and `CategoriesViewControllerUITests`. I'd like to add more UI tests, but the time constraint for this code challenge is acknowledged.
 
 6. Layout and styling: The app's layout is implemented programmatically, and the main storyboard has been removed. I prefer SnapKit library typically for creating flexible and readable constraints, although in this case, NSLayoutConstraints were used for simplicity. A separate constants file holds color and font constants for consistency.
 
