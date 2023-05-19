@@ -113,6 +113,15 @@ struct Category: Codable, Hashable {
     }
 }
 
+// Conveniently sort by name for array comparison.
+extension Category: Comparable {
+    static func < (lhs: Category, rhs: Category) -> Bool {
+        let leftName = lhs.name ?? ""
+        let rightName = rhs.name ?? ""
+        return leftName < rightName
+    }
+}
+
 struct Author: Codable {
     let title: String?
     let name: String?

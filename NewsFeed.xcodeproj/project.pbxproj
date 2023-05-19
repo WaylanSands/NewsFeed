@@ -39,7 +39,6 @@
 		4835C6172A15CD9F0077A69C /* ArticleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5902A1466270010F8B7 /* ArticleCoordinator.swift */; };
 		4835C6182A15CDA80077A69C /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58E2A1465F70010F8B7 /* CategoriesCoordinator.swift */; };
 		4835C6192A15CDA90077A69C /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58E2A1465F70010F8B7 /* CategoriesCoordinator.swift */; };
-		4835C61A2A15CDAD0077A69C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */; };
 		4835C61B2A15CDAE0077A69C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E58B2A1465580010F8B7 /* AppCoordinator.swift */; };
 		4835C61D2A15DD760077A69C /* ArticlesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835C61C2A15DD760077A69C /* ArticlesViewModelTest.swift */; };
 		4835C61F2A15E4910077A69C /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4835C61E2A15E4910077A69C /* NetworkServiceTests.swift */; };
@@ -69,7 +68,6 @@
 		48EAA43D2A15C2FC00A02A75 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5872A1464880010F8B7 /* NetworkService.swift */; };
 		48EAA43E2A15C30200A02A75 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5932A1469750010F8B7 /* Article.swift */; };
 		48EAA4402A15C31700A02A75 /* MockCategoryViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EAA43F2A15C31700A02A75 /* MockCategoryViewModelDelegate.swift */; };
-		48EAA4412A15C33600A02A75 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E55B2A145BA30010F8B7 /* CategoriesViewController.swift */; };
 		48EAA4442A15C37200A02A75 /* CategoriesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EAA4432A15C37200A02A75 /* CategoriesViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -343,6 +341,7 @@
 				48D4E5662A145BA60010F8B7 /* Sources */,
 				48D4E5672A145BA60010F8B7 /* Frameworks */,
 				48D4E5682A145BA60010F8B7 /* Resources */,
+				6B955C31E86FFC4AEB2E761F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -389,7 +388,6 @@
 					};
 					48D4E5692A145BA60010F8B7 = {
 						CreatedOnToolsVersion = 13.4.1;
-						TestTargetID = 48D4E5532A145BA30010F8B7;
 					};
 					48D4E5732A145BA60010F8B7 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -464,6 +462,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B955C31E86FFC4AEB2E761F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NewsFeedTests/Pods-NewsFeedTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NewsFeedTests/Pods-NewsFeedTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NewsFeedTests/Pods-NewsFeedTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7517C9E882E770B9434F2B47 /* [CP] Embed Pods Frameworks */ = {
@@ -584,13 +599,11 @@
 				4835C6162A15CD9F0077A69C /* ArticleCoordinator.swift in Sources */,
 				48EAA4442A15C37200A02A75 /* CategoriesViewModelTests.swift in Sources */,
 				4835C60C2A15CD660077A69C /* ArticlesViewModel.swift in Sources */,
-				48EAA4412A15C33600A02A75 /* CategoriesViewController.swift in Sources */,
 				4835C6022A15CD470077A69C /* ErrorPresenter.swift in Sources */,
 				48EAA43D2A15C2FC00A02A75 /* NetworkService.swift in Sources */,
 				4835C6212A15ED730077A69C /* UrlSessionMock.swift in Sources */,
 				4835C6182A15CDA80077A69C /* CategoriesCoordinator.swift in Sources */,
 				4835C61F2A15E4910077A69C /* NetworkServiceTests.swift in Sources */,
-				4835C61A2A15CDAD0077A69C /* AppCoordinator.swift in Sources */,
 				4835C6082A15CD610077A69C /* ArticleViewController.swift in Sources */,
 				4831144B2A15C62300731E84 /* CategoriesViewModel.swift in Sources */,
 				4835C6002A15CD290077A69C /* CategoryCollectionViewCell.swift in Sources */,
@@ -829,7 +842,6 @@
 			baseConfigurationReference = 16D02613B810B55DC9A9FC86 /* Pods-NewsFeedTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -840,7 +852,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsFeed.app/NewsFeed";
 			};
 			name = Debug;
 		};
@@ -849,7 +860,6 @@
 			baseConfigurationReference = 61BADE3CA54A572054E9F941 /* Pods-NewsFeedTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -860,7 +870,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsFeed.app/NewsFeed";
 			};
 			name = Release;
 		};

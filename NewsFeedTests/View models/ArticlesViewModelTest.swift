@@ -15,7 +15,6 @@ class ArticlesViewModelTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-    
         let dummyCategories = createDummyCategories(count: 7)
         let articles = createArticles(with: dummyCategories)
         

@@ -12,10 +12,12 @@ target 'NewsFeed' do
   target 'NewsFeedTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Kingfisher', '~> 7.0'
   end
 
   target 'NewsFeedUITests' do
     # Pods for testing
+    pod 'Kingfisher', '~> 7.0'
   end
 
 end

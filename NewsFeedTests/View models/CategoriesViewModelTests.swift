@@ -18,6 +18,7 @@ class CategoriesViewModelTests: XCTestCase {
         super.setUp()
         networkService = MockNetworkService()
         viewModel = CategoriesViewModel(networkService: networkService)
+        delegate = MockCategoryViewModelDelegate()
         viewModel.delegate = delegate
     }
     
@@ -30,27 +31,27 @@ class CategoriesViewModelTests: XCTestCase {
     /// Test the CategoriesViewModel is capable of fetching articles
     /// and settings the categories property to the articles's categories.
     /// Also check that the CategoryViewModelDelegate was updated.
-    func testCanFetchCategories() async throws {
-        let dummyCategories = createDummyCategories(count: 7)
+    func testCanFetchCategories() async {
+        let dummyCategories = createDummyCategories(count: 7).sorted()
         let articles = createArticles(with: dummyCategories)
 
         mockNetworkServiceResult(.success(articles))
-
-        // Fetch mocked articles.
+        
         await viewModel.fetchArticles()
-                
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // Verify the categories are the same.
-            XCTAssertEqual(self.viewModel.categories, dummyCategories)
-            
-            // Verify the delegate method was called.
-            XCTAssertTrue(self.delegate.didLoadCategoriesCalled)
-        }
+
+        // Sort array via name to match the dummyCategories
+        viewModel.categories.sort()
+
+        // Verify the categories are the same.
+        XCTAssertEqual(viewModel.categories, dummyCategories)
+
+        // Verify the delegate method was called.
+        XCTAssertTrue(delegate.didLoadCategoriesCalled)
     }
 
     /// Test that the categories held by the CategoriesViewModel categories
     /// are unique and therefore contain no duplicates.
-    func testCategoriesAreUnique() async throws {
+    func testCategoriesAreUnique() async {
         // Create an array with duplicate category name "Business"
         let dummyCategories = [
             Category(name: "Business"),
@@ -72,15 +73,13 @@ class CategoriesViewModelTests: XCTestCase {
         // Fetch mocked articles.
         await viewModel.fetchArticles()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // Verify that the categories are unique.
-            XCTAssertEqual(self.viewModel.categories, uniqueCategories)
-        }
+        // Verify that the categories are unique.
+        XCTAssertEqual(self.viewModel.categories, uniqueCategories)
     }
     
     /// Test if the articles returned via the CategoriesViewModel are
     /// the same category as the selected category.
-    func testArticlesAreWithinCategory() async throws {
+    func testArticlesAreWithinCategory() async {
         let dummyCategories = [
             Category(name: "Business"),
             Category(name: "Investing"),
@@ -98,35 +97,31 @@ class CategoriesViewModelTests: XCTestCase {
         // Fetch mocked articles.
         await viewModel.fetchArticles()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let selectedCategory = Category(name: "Business")
-            
-            // Retrieve articles within the selected category.
-            let categorisedArticles = self.viewModel.articlesWithin(selectedCategory)
-            
-            // Filter articles the array should contain a count of 2 as there are
-            // two categories with the name "Business".
-            let filteredArticles = articles.filter { $0.categories?.first ==  selectedCategory }
-            
-            XCTAssertEqual(categorisedArticles.count, filteredArticles.count)
-        }
+        let selectedCategory = Category(name: "Business")
+        
+        // Retrieve articles within the selected category.
+        let categorisedArticles = self.viewModel.articlesWithin(selectedCategory)
+        
+        // Filter articles the array should contain a count of 2 as there are
+        // two categories with the name "Business".
+        let filteredArticles = articles.filter { $0.categories?.first ==  selectedCategory }
+        
+        XCTAssertEqual(categorisedArticles.count, filteredArticles.count)
     }
     
     /// Test that the CategoryViewModelDelegate method is called
     /// when an error is passed via the CategoriesViewModel.
-    func testCanTriggerError() async throws {
+    func testCanTriggerError() async {
         // Use delegate to present NewsFeedError.
         viewModel.delegate?.present(NewsFeedError.invalidURL)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            XCTAssertTrue(self.delegate.presentErrorCalled)
-        }
+        
+        XCTAssertTrue(self.delegate.presentErrorCalled)
     }
     
     // MARK: -  Helper functions
     
     func createDummyCategories(count: Int) -> [Category] {
-        return (0..<count).map { _ in Category(name: "") }
+        return (0..<count).map { index in Category(name: "\(index)") }
     }
 
     func createArticles(with categories: [Category]) -> [Article] {

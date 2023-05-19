@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol CategoryViewModelDelegate: AnyObject {
+    func present(_ error: Error)
+    func loadCategories()
+}
+
 class CategoriesViewModel {
     
     /// delegate will  be updated when categories have been fetched.
@@ -36,23 +41,14 @@ class CategoriesViewModel {
         
         switch result {
         case .success(let articles):
+            let allCategories = articles.compactMap { $0.categories?.first }
+            self.categories = Array(Set(allCategories))
+            self.articles = articles
             
-            // Update changes on the main thread.
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                
-                let allCategories = articles.compactMap { $0.categories?.first }
-                self.categories = Array(Set(allCategories))
-                self.articles = articles
-                
-                // Update the delegate categories have been loaded
-                self.delegate?.loadCategories()
-            }
+            // Update the delegate categories have been loaded
+            self.delegate?.loadCategories()
         case .failure(let error):
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.delegate?.present(error)
-            }
+            self.delegate?.present(error)
         }
     }
     
