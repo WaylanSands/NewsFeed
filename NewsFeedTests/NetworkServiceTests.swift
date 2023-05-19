@@ -8,8 +8,10 @@
 import XCTest
 @testable import NewsFeed
 
+/// TODO: Add a further test with JSON map of the Article response to test decoding.
 class NetworkServiceTests: XCTestCase {
     
+    /// Test a successful response of type [Article]
     func testGetArticles() async throws {
         // Create a mock article list response.
         let article1 = Article(category: Category(name: "1"))
@@ -28,7 +30,7 @@ class NetworkServiceTests: XCTestCase {
         
         switch result {
         case .success(let articles):
-            // Assert that the article list is as expected
+            // Verify that the article list is as expected
             XCTAssertEqual(articles.count, 3)
             XCTAssertEqual(articles[0].categories?.first?.name, "1")
             XCTAssertEqual(articles[1].categories?.first?.name, "2")
@@ -39,6 +41,8 @@ class NetworkServiceTests: XCTestCase {
         }
     }
     
+    /// Test that the getArticleList method will return an Result of type Error
+    /// if the response has no articles.
     func testEmptyAssetsResponse() async throws {
         // Add empty asset array in response.
         let mockResponse = ArticleListResponse(assets: [])

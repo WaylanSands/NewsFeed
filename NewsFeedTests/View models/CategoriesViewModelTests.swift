@@ -27,6 +27,9 @@ class CategoriesViewModelTests: XCTestCase {
         delegate = nil
     }
     
+    /// Test the CategoriesViewModel is capable of fetching articles
+    /// and settings the categories property to the articles's categories.
+    /// Also check that the CategoryViewModelDelegate was updated.
     func testCanFetchCategories() async throws {
         let dummyCategories = createDummyCategories(count: 7)
         let articles = createArticles(with: dummyCategories)
@@ -37,12 +40,18 @@ class CategoriesViewModelTests: XCTestCase {
         await viewModel.fetchArticles()
                 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // Verify the categories are the same.
             XCTAssertEqual(self.viewModel.categories, dummyCategories)
+            
+            // Verify the delegate method was called.
             XCTAssertTrue(self.delegate.didLoadCategoriesCalled)
         }
     }
 
+    /// Test that the categories held by the CategoriesViewModel categories
+    /// are unique and therefore contain no duplicates.
     func testCategoriesAreUnique() async throws {
+        // Create an array with duplicate category name "Business"
         let dummyCategories = [
             Category(name: "Business"),
             Category(name: "Investing"),
@@ -69,6 +78,8 @@ class CategoriesViewModelTests: XCTestCase {
         }
     }
     
+    /// Test if the articles returned via the CategoriesViewModel are
+    /// the same category as the selected category.
     func testArticlesAreWithinCategory() async throws {
         let dummyCategories = [
             Category(name: "Business"),
@@ -81,7 +92,7 @@ class CategoriesViewModelTests: XCTestCase {
         
         let articles = createArticles(with: dummyCategories)
         
-        // Mock the successful response
+        // Mock the successful response.
         networkService.mockResult = .success(articles)
         
         // Fetch mocked articles.
@@ -92,12 +103,17 @@ class CategoriesViewModelTests: XCTestCase {
             
             // Retrieve articles within the selected category.
             let categorisedArticles = self.viewModel.articlesWithin(selectedCategory)
+            
+            // Filter articles the array should contain a count of 2 as there are
+            // two categories with the name "Business".
             let filteredArticles = articles.filter { $0.categories?.first ==  selectedCategory }
             
             XCTAssertEqual(categorisedArticles.count, filteredArticles.count)
         }
     }
     
+    /// Test that the CategoryViewModelDelegate method is called
+    /// when an error is passed via the CategoriesViewModel.
     func testCanTriggerError() async throws {
         // Use delegate to present NewsFeedError.
         viewModel.delegate?.present(NewsFeedError.invalidURL)
@@ -106,7 +122,6 @@ class CategoriesViewModelTests: XCTestCase {
             XCTAssertTrue(self.delegate.presentErrorCalled)
         }
     }
-    
     
     // MARK: -  Helper functions
     
