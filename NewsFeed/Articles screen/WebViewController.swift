@@ -30,6 +30,7 @@ final class WebViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Article"
         configureSubviews()
         loadArticle()
     }

@@ -13,12 +13,12 @@ protocol ArticleCellDelegate: AnyObject {
 }
 
 final class ArticleTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "articleTableViewCell"
+    static let identifier = "articleTableViewCell"
     
     weak var delegate: ArticleCellDelegate?
     var articleURLString: String?
         
-    private lazy var articleImageView: UIImageView = {
+    lazy var articleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 6
@@ -26,7 +26,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.largeFont
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var abstractLabel: UILabel = {
+    lazy var abstractLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.mediumFont
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var authorLabel: UILabel = {
+    lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Constants.smallFont
@@ -60,7 +60,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var createdAtLabel: UILabel = {
+    lazy var createdAtLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Constants.smallFont
@@ -77,9 +77,11 @@ final class ArticleTableViewCell: UITableViewCell {
     
     private lazy var ctaButton: UIButton = {
        let button = UIButton()
+        let title = "Visit Article"
+        button.setTitle(title, for: .normal)
+        button.accessibilityIdentifier = title
         button.addTarget(self, action: #selector(ctaPress), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Visit Article", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.titleLabel?.font = Constants.mediumFont
         button.backgroundColor = Constants.lightBlue
@@ -89,6 +91,7 @@ final class ArticleTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessibilityIdentifier = ArticleTableViewCell.identifier
         selectionStyle = .none
         configureSubviews()
 

@@ -8,9 +8,9 @@
 import UIKit
 
 final class CategoryCollectionViewCell: UICollectionViewCell {
-    static let reuseIdentifier = "categoryCollectionViewCell"
+    static let identifier = "categoryCollectionViewCell"
     
-    private lazy var cardView: UIView = {
+    lazy var cardView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 6
@@ -29,6 +29,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        accessibilityIdentifier = CategoryCollectionViewCell.identifier
         contentView.layer.masksToBounds = true
         contentView.layer.cornerRadius = 8
         contentView.clipsToBounds = true
