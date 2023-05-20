@@ -46,6 +46,7 @@
 		48442C8A2A18433600330D15 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D4E5932A1469750010F8B7 /* Article.swift */; };
 		48442C8B2A18434C00330D15 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489F6EB42A183BBE0000BD1B /* Author.swift */; };
 		48442C8C2A18434F00330D15 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489F6EB12A183BA40000BD1B /* Image.swift */; };
+		48442C8E2A186ED300330D15 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EAA43B2A15C2DC00A02A75 /* MockNetworkService.swift */; };
 		484C3F272A149B9E00D2B034 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F262A149B9E00D2B034 /* ArticleViewController.swift */; };
 		484C3F292A149C0E00D2B034 /* ArticlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F282A149C0E00D2B034 /* ArticlesViewModel.swift */; };
 		484C3F2B2A149C6A00D2B034 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484C3F2A2A149C6A00D2B034 /* ArticleTableViewCell.swift */; };
@@ -594,6 +595,7 @@
 				48EAA4362A15B99E00A02A75 /* DateExtension.swift in Sources */,
 				489F6EAF2A183B2E0000BD1B /* Category.swift in Sources */,
 				48D4E58A2A1464B30010F8B7 /* Constants.swift in Sources */,
+				48442C8E2A186ED300330D15 /* MockNetworkService.swift in Sources */,
 				48D4E5972A146D500010F8B7 /* CategoriesViewModel.swift in Sources */,
 				48D4E5942A1469750010F8B7 /* Article.swift in Sources */,
 				48D4E59D2A147EAA0010F8B7 /* CategoryCollectionViewCell.swift in Sources */,

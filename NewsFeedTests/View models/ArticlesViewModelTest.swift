@@ -15,8 +15,8 @@ class ArticlesViewModelTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let dummyCategories = createDummyCategories(count: 7)
-        let articles = createArticles(with: dummyCategories)
+        let stubbedCategories = createStubbedCategories(count: 7)
+        let articles = createArticles(with: stubbedCategories)
         
         viewModel = ArticlesViewModel(articles: articles)
     }
@@ -30,7 +30,7 @@ class ArticlesViewModelTest: XCTestCase {
     /// Open to changes down the line.
     func testNumberOfRows() {
         let expectedRowCount = viewModel.articles.count
-        XCTAssertEqual(viewModel.numberOfRows, expectedRowCount)
+        XCTAssertEqual(viewModel.numberOfRows, expectedRowCount, "Incorrect number of rows")
     }
     
     /// Test that the articles contained by ArticlesViewModel are
@@ -64,14 +64,14 @@ class ArticlesViewModelTest: XCTestCase {
         let sortedDates = sortedArticles.compactMap { $0.timeStamp }
         let vmSortedDates = viewModel.articles.compactMap { $0.timeStamp }
 
-        // Verify that sortedDates of the sortedArticles are the
+        // Assert that sortedDates of the sortedArticles are the
         // same as the vmSortedDates of the viewModel articles.
-        XCTAssertEqual(sortedDates, vmSortedDates)
+        XCTAssertEqual(sortedDates, vmSortedDates, "Articles not ordered by timestamp")
     }
     
     // MARK: - Helper functions
     
-    func createDummyCategories(count: Int) -> [Category] {
+    func createStubbedCategories(count: Int) -> [Category] {
         return (0..<count).map { _ in Category(name: "") }
     }
     

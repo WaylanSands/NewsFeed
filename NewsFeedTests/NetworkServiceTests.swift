@@ -17,7 +17,8 @@ class NetworkServiceTests: XCTestCase {
         let article1 = Article(category: Category(name: "1"))
         let article2 = Article(category: Category(name: "2"))
         let article3 = Article(category: Category(name: "3"))
-        let mockResponse = ArticleListResponse(assets: [article1, article2, article3])
+        let dummyArticles = [article1, article2, article3]
+        let mockResponse = ArticleListResponse(assets: dummyArticles)
         
         // Create a mock URLSession and set the expected response.
         let mockSession = sessionMockWith(response: mockResponse)
@@ -29,13 +30,9 @@ class NetworkServiceTests: XCTestCase {
         let result = await networkService.getArticleList()
         
         switch result {
-        case .success(let articles):
-            // Verify that the article list is as expected
-            XCTAssertEqual(articles.count, 3)
-            XCTAssertEqual(articles[0].categories?.first?.name, "1")
-            XCTAssertEqual(articles[1].categories?.first?.name, "2")
-            XCTAssertEqual(articles[2].categories?.first?.name, "3")
-            
+        case .success(let resultArticles):
+            // Assert that the article returned is the same as the dummyArticles.
+            XCTAssertEqual(dummyArticles, resultArticles)
         case .failure(let error):
             XCTFail("Unexpected failure: \(error)")
         }

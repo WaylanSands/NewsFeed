@@ -14,14 +14,14 @@ class CategoriesViewControllerUITests: XCTestCase {
     /// Test that collection view on CategoriesViewController
     /// contains the same categories returned via the CategoriesViewModel.
     func testCategoriesAreAdded() throws {
-        let dummyCategories = [
+        let stubbedCategories = [
             Category(name: "Category 1"),
             Category(name: "Category 2"),
             Category(name: "Category 3")
         ]
         
         // Create articles from the stubs.
-        let articles = createArticles(with: dummyCategories)
+        let articles = createArticles(with: stubbedCategories)
         
         let mockService = MockNetworkService()
         
@@ -37,21 +37,32 @@ class CategoriesViewControllerUITests: XCTestCase {
         viewController.loadViewIfNeeded()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // Assert that the collectionView has the expected number of items
             let cellCount = viewController.collectionView.numberOfItems(inSection: 0)
-            XCTAssertEqual(cellCount, dummyCategories.count)
             
-            // Assert that the category names are correctly displayed in the cells
+            // Assert that the collectionView has the expected number of items.
+            XCTAssertEqual(cellCount, stubbedCategories.count)
+            
             for (index, category) in viewModel.categories.enumerated() {
                 let indexPath = IndexPath(item: index, section: 0)
-                let cell = viewController.collectionView(viewController.collectionView, cellForItemAt: indexPath) as? CategoryCollectionViewCell
+                let cell = viewController.collectionView(viewController.collectionView,
+                                                         cellForItemAt: indexPath) as? CategoryCollectionViewCell
                 
-                XCTAssertNotNil(cell, "Cell should not be nil")
-                
-                // Verify that the cell text is the same as the category name of the same index.
-                XCTAssertEqual(cell?.titleLabel.text, category.name)
+                self.verifyConfiguration(for: cell, with: category)
             }
         }
+    }
+    
+    func verifyConfiguration(for cell: CategoryCollectionViewCell?, with category: Category) {
+        XCTAssertNotNil(cell, "Cell should not be nil")
+
+        // Assert that the cell text is the same as the category name.
+        XCTAssertEqual(cell?.titleLabel.text, category.name, "Incorrect title label")
+        
+        // Assert that the cell backgroundColor is the same as the category colour.
+        XCTAssertEqual(cell?.cardView.backgroundColor, category.colour, "Incorrect cell colour")
+        
+        // Assert that the cell font is extraLargeFont.
+        XCTAssertEqual(cell?.titleLabel, Constants.extraLargeFont, "Incorrect cell font")
     }
     
     // MARK: -  Helper functions

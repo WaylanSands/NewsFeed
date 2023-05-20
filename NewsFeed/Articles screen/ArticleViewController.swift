@@ -12,7 +12,7 @@ final class ArticlesViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ArticleTableViewCell.self, forCellReuseIdentifier: ArticleTableViewCell.reuseIdentifier)
+        tableView.register(ArticleTableViewCell.self, forCellReuseIdentifier: ArticleTableViewCell.identifier)
         tableView.separatorStyle = .none
         return tableView
     }()
@@ -25,6 +25,7 @@ final class ArticlesViewController: UIViewController {
     init(viewModel: ArticlesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle:  nil)
+        self.title = viewModel.title
     }
     
     required init?(coder: NSCoder) {
@@ -57,7 +58,7 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.reuseIdentifier) as? ArticleTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.identifier) as? ArticleTableViewCell else {
             ErrorPresenter.presentErrorAlert(NewsFeedError.articleCellError, from: self)
             return UITableViewCell()
         }

@@ -15,13 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        // Create an AppCoordinator instance for devices less than iOS 13.
         if #unavailable(iOS 13.0) {
-            // Will create an AppCoordinator instance for devices less than iOS 13 and
-            // set the window's rootViewController as the appCoordinator's navigationController.
-            // For devices running iOS 13 and greater the scene delegate will handle this operation.
             startAppCoordinator()
         }
-        
+
         return true
     }
     

@@ -11,6 +11,8 @@ class ArticlesViewModel {
     /// Array of Article ordered by timestamp.
     let articles: [Article]
     
+    let title = "Articles"
+    
     /// Returns number of articles
     var numberOfRows: Int {
         articles.count

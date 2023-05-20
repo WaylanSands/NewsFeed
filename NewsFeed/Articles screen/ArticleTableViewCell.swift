@@ -13,7 +13,7 @@ protocol ArticleCellDelegate: AnyObject {
 }
 
 final class ArticleTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "articleTableViewCell"
+    static let identifier = "articleTableViewCell"
     
     weak var delegate: ArticleCellDelegate?
     var articleURLString: String?
@@ -77,9 +77,11 @@ final class ArticleTableViewCell: UITableViewCell {
     
     private lazy var ctaButton: UIButton = {
        let button = UIButton()
+        let title = "Visit Article"
+        button.setTitle(title, for: .normal)
+        button.accessibilityIdentifier = title
         button.addTarget(self, action: #selector(ctaPress), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Visit Article", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.titleLabel?.font = Constants.mediumFont
         button.backgroundColor = Constants.lightBlue
@@ -89,6 +91,7 @@ final class ArticleTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        accessibilityIdentifier = ArticleTableViewCell.identifier
         selectionStyle = .none
         configureSubviews()
 
