@@ -13,6 +13,7 @@ class NewsFeedUITestsLaunchTests: XCTestCase {
         continueAfterFailure = false
     }
 
+    /// Test end to end with live API.
     func testLaunch() throws {
         let app = XCUIApplication()
         app.launch()

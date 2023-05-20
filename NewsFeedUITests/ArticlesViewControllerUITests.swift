@@ -10,9 +10,9 @@ import XCTest
 
 class ArticlesViewControllerUITests: XCTestCase {
     
-    /// Test that collection view on CategoriesViewController
-    /// contains the same categories returned via the CategoriesViewModel.
-    func testCategoriesAreAdded()  {
+    /// Test the ArticlesViewController correctly sets up cells
+    /// with articles supplied via the ArticlesViewModel.
+    func testArticleViewController()  {
         let articles = createArticles()
         let viewModel = ArticlesViewModel(articles: articles)
         let viewController = ArticlesViewController(viewModel: viewModel)
@@ -67,10 +67,6 @@ class ArticlesViewControllerUITests: XCTestCase {
     
     func cell(for vc: ArticlesViewController, at index: IndexPath) -> UITableViewCell {
         return vc.tableView(vc.tableView, cellForRowAt: index)
-    }
-
-    func createArticles(with categories: [Category]) -> [Article] {
-        return categories.map { Article(category: $0) }
     }
     
     func createArticles() -> [Article] {
