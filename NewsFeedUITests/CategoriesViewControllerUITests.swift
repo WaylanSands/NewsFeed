@@ -36,19 +36,19 @@ class CategoriesViewControllerUITests: XCTestCase {
         // Load the view
         viewController.loadViewIfNeeded()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let cellCount = viewController.collectionView.numberOfItems(inSection: 0)
+        RunLoop.current.run(until: Date().addingTimeInterval(1))
+        
+        let cellCount = viewController.collectionView.numberOfItems(inSection: 0)
+        
+        // Assert that the collectionView has the expected number of items.
+        XCTAssertEqual(cellCount, stubbedCategories.count)
+        
+        for (index, category) in viewModel.categories.enumerated() {
+            let indexPath = IndexPath(item: index, section: 0)
+            let cell = viewController.collectionView(viewController.collectionView,
+                                                     cellForItemAt: indexPath) as? CategoryCollectionViewCell
             
-            // Assert that the collectionView has the expected number of items.
-            XCTAssertEqual(cellCount, stubbedCategories.count)
-            
-            for (index, category) in viewModel.categories.enumerated() {
-                let indexPath = IndexPath(item: index, section: 0)
-                let cell = viewController.collectionView(viewController.collectionView,
-                                                         cellForItemAt: indexPath) as? CategoryCollectionViewCell
-                
-                self.verifyConfiguration(for: cell, with: category)
-            }
+            self.verifyConfiguration(for: cell, with: category)
         }
     }
     
@@ -62,7 +62,7 @@ class CategoriesViewControllerUITests: XCTestCase {
         XCTAssertEqual(cell?.cardView.backgroundColor, category.colour, "Incorrect cell colour")
         
         // Assert that the cell font is extraLargeFont.
-        XCTAssertEqual(cell?.titleLabel, Constants.extraLargeFont, "Incorrect cell font")
+        XCTAssertEqual(cell?.titleLabel.font, Constants.extraLargeFont, "Incorrect cell font")
     }
     
     // MARK: -  Helper functions

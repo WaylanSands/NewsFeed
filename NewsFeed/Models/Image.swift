@@ -8,9 +8,7 @@
 import Foundation
 
 struct Image: Codable {
-    let photographer: String?
     let type: String?
-    let height: Int?
     let width: Int?
     let url: String?
 }

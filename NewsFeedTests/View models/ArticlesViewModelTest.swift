@@ -57,7 +57,7 @@ class ArticlesViewModelTest: XCTestCase {
             XCTAssertNotNil(article1.timeStamp, "Nil timeStamp found in articles")
             XCTAssertNotNil(article2.timeStamp, "Nil timeStamp found in articles")
             
-            return article1.timeStamp! < article2.timeStamp!
+            return article1.timeStamp! > article2.timeStamp!
         }
         
         // Get sorted timestamps arrays for comparison.

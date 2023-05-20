@@ -14,14 +14,11 @@ struct ArticleListResponse: Codable {
 }
 
 struct Article: Codable {
-    let tabletHeadline: String?
     let categories: [Category]?
     let relatedImages: [Image]?
     let authors: [Author]?
     let headline: String?
     let theAbstract: String?
-    let assetType: String?
-    let sponsored: Bool?
     let byLine: String?
     let timeStamp: Int?
     let url: String?
@@ -64,25 +61,28 @@ extension Article: Comparable, Hashable {
     /// Sorts articles by  timeStamp. Articles with a nil timestamp
     /// will be set towards the back.
     static func < (lhs: Article, rhs: Article) -> Bool {
-        return lhs.timeStamp ?? Int.max < rhs.timeStamp ?? Int.max
+        return lhs.timeStamp ?? Int.min > rhs.timeStamp ?? Int.min
     }
 }
 
 
 extension Article {
     /// Used for convenience when Unit testing
-    init(category: Category, timeStamp: Int? = nil) {
+    init(category: Category,
+         url: String? = nil,
+         timeStamp: Int? = nil,
+         headline: String? = nil,
+         authors: [Author]? = nil,
+         theAbstract: String? = nil
+    ) {
+        self.theAbstract = theAbstract
         self.categories = [category]
         self.timeStamp = timeStamp
-        self.tabletHeadline = nil
+        self.authors = authors
+        self.headline = headline
+        self.url = url
         self.relatedImages = nil
-        self.authors = nil
-        self.headline = nil
-        self.theAbstract = nil
-        self.assetType = nil
-        self.sponsored = nil
         self.byLine = nil
-        self.url = nil
         self.id = nil
     }
 }

@@ -18,7 +18,7 @@ final class ArticleTableViewCell: UITableViewCell {
     weak var delegate: ArticleCellDelegate?
     var articleURLString: String?
         
-    private lazy var articleImageView: UIImageView = {
+    lazy var articleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 6
@@ -26,7 +26,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.largeFont
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var abstractLabel: UILabel = {
+    lazy var abstractLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.mediumFont
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var authorLabel: UILabel = {
+    lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Constants.smallFont
@@ -60,7 +60,7 @@ final class ArticleTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var createdAtLabel: UILabel = {
+    lazy var createdAtLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Constants.smallFont
