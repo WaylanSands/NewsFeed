@@ -10,12 +10,13 @@ import Foundation
 enum NewsFeedError: Error {
     case categoryCellError
     case articleCellError
-    case assetError
+    case decodingError
+    case missingAssets
     case invalidURL
     
     var description: String {
         switch self {
-        case .assetError:
+        case .missingAssets:
             return "We were unable to retrieve article assets from endpoint"
         case .invalidURL:
             return "Seems the url is invalid for the request"
@@ -23,6 +24,8 @@ enum NewsFeedError: Error {
             return "We ran into an issue creating category cells"
         case .articleCellError:
             return "We ran into an issue creating article cells"
+        case .decodingError:
+            return "We ran into an issue decoding the response"
         }
     }
 }
@@ -54,10 +57,14 @@ class NetworkService: ArticleService {
         do {
             let (data, _) = try await urlSession.data(for: request)
             let decoder = JSONDecoder()
-            let listResponse = try decoder.decode(ArticleListResponse.self, from: data)
+            let listResponse = try? decoder.decode(ArticleListResponse.self, from: data)
+                        
+            guard let assets = listResponse?.assets else {
+                return .failure(NewsFeedError.decodingError)
+            }
             
-            guard let assets = listResponse.assets, !assets.isEmpty else {
-                return .failure(NewsFeedError.assetError)
+            guard !assets.isEmpty else {
+                return .failure(NewsFeedError.missingAssets)
             }
             
             return .success(assets)
