@@ -416,7 +416,6 @@
 					};
 					48D4E5692A145BA60010F8B7 = {
 						CreatedOnToolsVersion = 13.4.1;
-						TestTargetID = 48D4E5532A145BA30010F8B7;
 					};
 					48D4E5732A145BA60010F8B7 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -893,7 +892,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsFeed.app/NewsFeed";
 			};
 			name = Debug;
 		};
@@ -912,7 +910,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsFeed.app/NewsFeed";
 			};
 			name = Release;
 		};
