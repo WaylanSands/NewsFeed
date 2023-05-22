@@ -37,12 +37,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Make the window the key window and set it as visible.
         window.makeKeyAndVisible()
         
-//        #if DEBUG
-//        if ProcessInfo.processInfo.environment["NEWS-FEED-TESTS"] != nil {
-//            return
-//        }
-//        #endif
-        
         // Push CategoriesViewController onto the navigation stack
         appCoordinator.start()
     }

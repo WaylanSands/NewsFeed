@@ -8,7 +8,6 @@
 import XCTest
 @testable import NewsFeed
 
-/// TODO: Add a further test with JSON map of the Article response to test decoding.
 class NetworkServiceTests: XCTestCase {
     
     /// Test a successful response of type [Article]
