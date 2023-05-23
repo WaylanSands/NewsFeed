@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum NewsFeedError: Error {
+enum NewsFeedError: Error, CaseIterable {
     case categoryCellError
     case articleCellError
     case decodingError
     case missingAssets
+    case networkError
     case invalidURL
     
     var description: String {
@@ -26,7 +28,14 @@ enum NewsFeedError: Error {
             return "We ran into an issue creating article cells"
         case .decodingError:
             return "We ran into an issue decoding the response"
+        case .networkError:
+            return "We had a problem fetching data"
         }
+    }
+    
+    var errorCode: String {
+        let index = NewsFeedError.allCases.firstIndex(of: self)!
+        return "error \(index)"
     }
 }
 
@@ -38,7 +47,7 @@ class NetworkService: ArticleService {
     
     private let urlSession: URLSession
     
-    init(session: URLSession) {
+    init(session: URLSession = URLSession.shared) {
         self.urlSession = session
     }
     
@@ -55,7 +64,12 @@ class NetworkService: ArticleService {
         request.httpMethod = "GET"
         
         do {
-            let (data, _) = try await urlSession.data(for: request)
+            let (data, response) = try await urlSession.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                return .failure(NewsFeedError.networkError)
+            }
+            
             let decoder = JSONDecoder()
             let listResponse = try? decoder.decode(ArticleListResponse.self, from: data)
                         

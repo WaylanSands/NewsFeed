@@ -9,6 +9,16 @@ import XCTest
 @testable import NewsFeed
 
 class NetworkServiceTests: XCTestCase {
+    var networkService: NetworkService!
+    let apiURL = Constants.newsURL!
+    
+    override func setUp() {
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession.init(configuration: configuration)
+        
+        networkService = NetworkService(session: urlSession)
+    }
     
     /// Test a successful response of type [Article]
     func testGetArticles() async {
@@ -16,14 +26,11 @@ class NetworkServiceTests: XCTestCase {
         let article1 = Article(category: Category(name: "1"))
         let article2 = Article(category: Category(name: "2"))
         let article3 = Article(category: Category(name: "3"))
-        let dummyArticles = [article1, article2, article3]
-        let mockResponse = ArticleListResponse(assets: dummyArticles)
+        let stubbedArticles = [article1, article2, article3]
+        let articleList = ArticleListResponse(assets: stubbedArticles)
         
-        // Create a mock URLSession and set the expected response.
-        let mockSession = sessionMockWith(response: mockResponse)
-        
-        // Create an instance of NetworkService with the mock session.
-        let networkService = NetworkService(session: mockSession)
+        // Create a mock URLSession response with articleList.
+        createMockResponseWith(articleList: articleList, with: apiURL)
         
         // Call the getArticleList method and await the result
         let result = await networkService.getArticleList()
@@ -31,7 +38,7 @@ class NetworkServiceTests: XCTestCase {
         switch result {
         case .success(let resultArticles):
             // Assert that the article returned is the same as the dummyArticles.
-            XCTAssertEqual(dummyArticles, resultArticles)
+            XCTAssertEqual(stubbedArticles, resultArticles)
         case .failure(let error):
             XCTFail("Unexpected failure: \(error)")
         }
@@ -41,61 +48,94 @@ class NetworkServiceTests: XCTestCase {
     /// if the response has no articles.
     func testEmptyAssetsResponse() async {
         // Add empty asset array in response.
-        let mockResponse = ArticleListResponse(assets: [])
-        
-        // Create a mock URLSession and set the expected response.
-        let mockSession = sessionMockWith(response: mockResponse)
-        
-        // Create an instance of NetworkService with the mock session.
-        let networkService = NetworkService(session: mockSession)
-        
+        let articleList = ArticleListResponse(assets: [])
+
+        // Create a mock URLSession response with empty articles.
+        createMockResponseWith(articleList: articleList, with: apiURL)
+
         // Call the getArticleList method and await the result.
         let result = await networkService.getArticleList()
-        
+
         // Assert that the result is failure with assetError.
         switch result {
         case .success:
             XCTFail("Expected failure due missing assets")
-            
+
         case .failure(let error):
             XCTAssertEqual(error as? NewsFeedError, NewsFeedError.missingAssets)
         }
     }
-    
+
     /// Test that when decoding fails the appropriate error is returned.
     func testDecodingFailure() async {
         // Create an incorrect ArticleResponse json format.
         let incorrectData = ["Channel" : 9]
-        
-        // Create a mock URLSession and set the expected response.
-        let mockSession = sessionMockWith(jsonDict: incorrectData)
-        
-        // Create an instance of NetworkService with the mock session.
-        let networkService = NetworkService(session: mockSession)
-        
+
+        // Create a mock URLSession response with an invalid data.
+        createMockResponseWith(jsonDict: incorrectData, with: apiURL)
+
         // Call the getArticleList method and await the result.
         let result = await networkService.getArticleList()
-        
+
         // Assert that the result is failure with assetError.
         switch result {
         case .success:
-            XCTFail("Expected failure due missing assets")
-            
+            XCTFail("Expected failure due to missing assets")
+
         case .failure(let error):
             XCTAssertEqual(error as? NewsFeedError, NewsFeedError.decodingError)
         }
     }
     
-    private func sessionMockWith(response: ArticleListResponse) -> URLSessionMock {
-        let data = try? JSONEncoder().encode(response)
-        let response = HTTPURLResponse(url: Constants.newsURL!, statusCode: 200, httpVersion: nil, headerFields: nil)
-        return URLSessionMock(data: data, response: response)
+    func testInvalidURL() async {
+        // Create a mock article list response.
+        let article1 = Article(category: Category(name: "1"))
+        let stubbedArticles = [article1]
+        let articleList = ArticleListResponse(assets: stubbedArticles)
+        
+        let invalidURL = URL(string: "incorrect")!
+        
+        // Create a mock URLSession response with an invalid url.
+        createMockResponseWith(articleList: articleList, with: invalidURL)
+
+        // Call the getArticleList method and await the result.
+        let result = await networkService.getArticleList()
+
+        // Assert that the result is failure with assetError.
+        switch result {
+        case .success:
+            XCTFail("Expected failure due to invalid URL")
+
+        case .failure(let error):
+            // Assert that the error returned contains the invalidURL error code.
+            XCTAssertTrue(error.localizedDescription.contains(NewsFeedError.invalidURL.errorCode))
+        }
     }
     
-    private func sessionMockWith(jsonDict: [String: Any]) -> URLSessionMock {
+    private func createMockResponseWith(articleList: ArticleListResponse, with url: URL) {
+        let data = try? JSONEncoder().encode(articleList)
+        
+        MockURLProtocol.requestHandler = { request in
+            guard let requestURL = request.url, requestURL == url else {
+              throw NewsFeedError.invalidURL
+          }
+          
+          let response = HTTPURLResponse(url: requestURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+          return (response, data)
+        }
+    }
+    
+    private func createMockResponseWith(jsonDict: [String: Any], with url: URL) {
         let data = try? JSONSerialization.data(withJSONObject: jsonDict, options: [])
-        let response = HTTPURLResponse(url: Constants.newsURL!, statusCode: 200, httpVersion: nil, headerFields: nil)
-        return URLSessionMock(data: data, response: response)
+        
+        MockURLProtocol.requestHandler = { request in
+          guard let requestURL = request.url, requestURL == url else {
+              throw NewsFeedError.invalidURL
+          }
+          
+          let response = HTTPURLResponse(url: requestURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+          return (response, data)
+        }
     }
 }
 
