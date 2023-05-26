@@ -59,14 +59,9 @@ class ArticlesViewModelTest: XCTestCase {
             
             return article1.timeStamp! > article2.timeStamp!
         }
-        
-        // Get sorted timestamps arrays for comparison.
-        let sortedDates = sortedArticles.compactMap { $0.timeStamp }
-        let vmSortedDates = viewModel.articles.compactMap { $0.timeStamp }
 
-        // Assert that sortedDates of the sortedArticles are the
-        // same as the vmSortedDates of the viewModel articles.
-        XCTAssertEqual(sortedDates, vmSortedDates, "Articles not ordered by timestamp")
+        // Assert that sortedArticles are the same as the viewModel.articles.
+        XCTAssertEqual(sortedArticles, viewModel.articles, "Articles not ordered by timestamp")
     }
     
     // MARK: - Helper functions
