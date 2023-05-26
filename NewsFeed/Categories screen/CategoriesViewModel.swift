@@ -41,7 +41,10 @@ class CategoriesViewModel {
         
         switch result {
         case .success(let articles):
-            let allCategories = articles.compactMap { $0.categories?.first }
+            // Get all the categories within the articles.
+            let allCategories = articles.compactMap { $0.categories }.flatMap { $0 }
+            
+            // Remove duplicates.
             self.categories = Array(Set(allCategories))
             self.articles = articles
             
@@ -54,6 +57,6 @@ class CategoriesViewModel {
     
     /// Returns an Array of Article within the provided category
     func articlesWithin(_ category: Category) -> [Article] {
-        return articles.filter { $0.categories?.first == category}
+        return articles.filter { $0.categories?.contains(category) ?? false }
     }
 }

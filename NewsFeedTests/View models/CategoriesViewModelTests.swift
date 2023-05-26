@@ -108,7 +108,7 @@ class CategoriesViewModelTests: XCTestCase {
         
         // Filter articles the array should contain a count of 2 as there are
         // two categories with the name "Business".
-        let filteredArticles = articles.filter { $0.categories?.first ==  selectedCategory }
+        let filteredArticles = articles.filter { $0.categories?.contains(selectedCategory) ?? false }
         
         // Assert that the count of articles returned from articlesWithin
         // is the same as the local filteredArticles count.

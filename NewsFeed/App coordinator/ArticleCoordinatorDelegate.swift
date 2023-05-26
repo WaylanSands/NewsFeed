@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ArticleCoordinator {
+protocol ArticleCoordinatorDelegate {
     func presentWebView(with url: URL)
 }

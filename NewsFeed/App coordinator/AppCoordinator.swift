@@ -14,7 +14,6 @@ protocol Coordinator: AnyObject {
 /// AppCoordinator serves as the main coordinator responsible for managing the navigation flow within the app.
 class AppCoordinator: Coordinator {
     private var navigationController: UINavigationController
-    private var childCoordinators = [Coordinator]()
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -30,7 +29,7 @@ class AppCoordinator: Coordinator {
     }
 }
 
-extension AppCoordinator: CategoriesCoordinator {
+extension AppCoordinator: CategoriesCoordinatorDelegate {
     func showArticles(_ articles: [Article]) {
         let viewModel = ArticlesViewModel(articles: articles)
         let viewController = ArticlesViewController(viewModel: viewModel)
@@ -40,7 +39,7 @@ extension AppCoordinator: CategoriesCoordinator {
     }
 }
 
-extension AppCoordinator: ArticleCoordinator {
+extension AppCoordinator: ArticleCoordinatorDelegate {
     func presentWebView(with url: URL) {
         let webViewViewController = WebViewController(url: url)
         navigationController.pushViewController(webViewViewController, animated: true)

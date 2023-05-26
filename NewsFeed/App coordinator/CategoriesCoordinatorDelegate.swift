@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CategoriesCoordinator: AnyObject {
+protocol CategoriesCoordinatorDelegate: AnyObject {
     func showArticles(_ articles: [Article])
 }
