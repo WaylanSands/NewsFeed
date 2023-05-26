@@ -18,7 +18,7 @@ final class ArticlesViewController: UIViewController {
     }()
     
     /// Handles web view presentation
-    var coordinatorDelegate: ArticleCoordinator?
+    var coordinatorDelegate: ArticleCoordinatorDelegate?
     
     private let viewModel: ArticlesViewModel
     
@@ -62,12 +62,9 @@ extension ArticlesViewController: UITableViewDataSource, UITableViewDelegate {
             ErrorPresenter.presentErrorAlert(NewsFeedError.articleCellError, from: self)
             return UITableViewCell()
         }
-        
-        let index = indexPath.row
-        
-        // Safely setup cell with article
-        if index < viewModel.articles.count {
-            let article = viewModel.articles[index]
+                
+        // Safely setup cell with an article.
+        if let article = viewModel.articles[safe: indexPath.row] {
             cell.setup(with: article)
         }
         

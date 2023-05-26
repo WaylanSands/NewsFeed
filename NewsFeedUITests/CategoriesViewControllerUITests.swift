@@ -10,45 +10,68 @@ import Foundation
 import XCTest
 
 class CategoriesViewControllerUITests: XCTestCase {
+    var mockDelegate: MockCategoriesCoordinatorDelegate!
+    var viewController: CategoriesViewController!
+    var viewModel: CategoriesViewModel!
     
-    /// Test that collection view on CategoriesViewController
-    /// contains the same categories returned via the CategoriesViewModel.
-    func testCategoriesAreAdded() throws {
+    override func setUp() {
+        super.setUp()
+        
         let stubbedCategories = [
             Category(name: "Category 1"),
             Category(name: "Category 2"),
             Category(name: "Category 3")
         ]
         
-        // Create articles from the stubs.
         let articles = createArticles(with: stubbedCategories)
         
         let mockService = MockNetworkService()
-        
-        // Configure the networkService to return stubbed categories
         mockService.mockResult = .success(articles)
         
-        let viewModel = CategoriesViewModel(networkService: mockService)
+        viewModel = CategoriesViewModel(networkService: mockService)
         
-        let viewController = CategoriesViewController(viewModel: viewModel)
+        viewController = CategoriesViewController(viewModel: viewModel)
+        mockDelegate = MockCategoriesCoordinatorDelegate()
+        viewController.coordinatorDelegate = mockDelegate
         viewModel.delegate = viewController
         
-        // Load the view
         viewController.loadViewIfNeeded()
+    }
+    
+    override func tearDown() {
+        viewController = nil
+        mockDelegate = nil
         
-        RunLoop.current.run(until: Date().addingTimeInterval(1))
-        
+        super.tearDown()
+    }
+    
+    /// Test that collection view on CategoriesViewController
+    /// contains the same categories returned via the CategoriesViewModel.
+    func testCategoriesAreAdded() {
         let cellCount = viewController.collectionView.numberOfItems(inSection: 0)
         
         // Assert that the collectionView has the expected number of items.
-        XCTAssertEqual(cellCount, stubbedCategories.count)
+        XCTAssertEqual(cellCount, viewModel.categories.count)
         
         for (index, category) in viewModel.categories.enumerated() {
             let indexPath = IndexPath(item: index, section: 0)
             let cell = viewController.collectionView(viewController.collectionView,
                                                      cellForItemAt: indexPath) as? CategoryCollectionViewCell
-            
+                        
             self.verifyConfiguration(for: cell, with: category)
+            
+            // Tap on "Category 3" cell.
+            if let categoryName = cell?.titleLabel.text, categoryName == "Category 3" {
+                viewController.collectionView.delegate?.collectionView?(viewController.collectionView, didSelectItemAt: indexPath)
+            }
+            
+            // Check articles passed to coordinator delegate all contain the selected category.
+            let articlesContainSelectedCategory = mockDelegate.articles.allSatisfy {
+                $0.categories?.contains(where: { $0.name == "Category 3" }) ?? false
+            }
+            
+            XCTAssertTrue(mockDelegate.didShowArticles, "Category selection delegate method not called")
+            XCTAssertTrue(articlesContainSelectedCategory, "Incorrect articles passed to coordinator delegate")
         }
     }
     

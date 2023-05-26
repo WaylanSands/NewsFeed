@@ -28,7 +28,6 @@ final class CategoriesViewController: UIViewController {
     }()
     
     lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionLayout)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -37,7 +36,7 @@ final class CategoriesViewController: UIViewController {
         return collectionView
     }()
     
-    var coordinatorDelegate: CategoriesCoordinator?
+    var coordinatorDelegate: CategoriesCoordinatorDelegate?
     
     init(viewModel: CategoriesViewModel) {
         self.viewModel = viewModel
@@ -53,7 +52,6 @@ final class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         // Set the data source and delegate
         collectionView.dataSource = self
@@ -109,9 +107,9 @@ extension CategoriesViewController: UICollectionViewDataSource, UICollectionView
             ErrorPresenter.presentErrorAlert(NewsFeedError.categoryCellError, from: self)
             return UICollectionViewCell()
         }
-    
-        if indexPath.item <= viewModel.categories.count {
-            let category = viewModel.categories[indexPath.item]
+        
+        // Safely setup cell with a category.
+        if let category = viewModel.categories[safe: indexPath.item] {
             cell.setup(with: category)
         }
         
@@ -121,13 +119,11 @@ extension CategoriesViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let index = indexPath.row
         
-        // Safety check the index is within range.
-        guard index < viewModel.categories.count else {
+        // Safely get the selected category.
+        guard let selectedCategory = viewModel.categories[safe: index] else {
             return
         }
-        
-        let selectedCategory = viewModel.categories[index]
-        
+                
         // Get all articles within the selected category.
         let articles = viewModel.articlesWithin(selectedCategory)
                 

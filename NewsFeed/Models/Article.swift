@@ -48,14 +48,10 @@ struct Article: Codable {
 }
 
 // Conveniently sort by timeStamp or compare via ID.
-extension Article: Comparable, Hashable {
+extension Article: Comparable {
     /// Compares articles via  id
     static func == (lhs: Article, rhs: Article) -> Bool {
         return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
     }
     
     /// Sorts articles by  timeStamp. Articles with a nil timestamp
